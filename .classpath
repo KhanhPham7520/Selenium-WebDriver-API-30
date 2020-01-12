@@ -2,7 +2,9 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="selenium"/>
-	<classpathentry kind="lib" path="library/selenium-server-standalone-2.53.1.jar"/>
-	<classpathentry kind="lib" path="D:/Online_Class_14/01-Software/Windows OS/selenium-server-standalone-2.53.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="library/selenium-server-standalone-2.53.1.jar"/>
+	<classpathentry kind="lib" path="library/selenium-java-2.0.0.jar"/>
+	<classpathentry kind="lib" path="library/selenium-firefox-driver-2.0.0.jar"/>
+	<classpathentry kind="lib" path="library/selenium-chrome-driver-3.141.59.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

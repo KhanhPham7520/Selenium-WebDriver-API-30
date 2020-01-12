@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -18,14 +18,16 @@ public class Topic_01_Setup_Environment {
 	// ưu tiên mở cái đầu tiên lên trước
 	@BeforeClass
 	public void beforeClass() {
+		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+		driver = new ChromeDriver();
 
-		driver = new FirefoxDriver();
+//		driver = new FirefoxDriver();
 
 		// Phóng to trình duyệt
 		driver.manage().window().maximize();
 
 		// Wait cho element được hiển thị thao tác
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		// Phóng to trình duyệt
 		driver.manage().window().maximize();
