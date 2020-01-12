@@ -22,7 +22,7 @@ public class Topic_03_Xpath_Part_1_Practice {
 		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		//div[@class="footer-container"]//a[@title="My Account"]
 		
 		
