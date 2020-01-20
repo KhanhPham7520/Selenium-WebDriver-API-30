@@ -97,7 +97,7 @@ public class Topic_04_Xpath_Css_Part_II {
 	@Test
 	public void TC_03_LoginWithPasswordLessThan6Chars() {
 		driver.findElement(emailTextbox).sendKeys("automation@gmail.com");
-		driver.findElement(passwordTextbox).sendKeys("123");
+		driver.findElement(passwordTextbox).sendKeys("1234");
 		driver.findElement(loginButton).click();
 		Assert.assertEquals(driver.findElement(By.id("advice-validate-password-pass")).getText(),
 				"Please enter 6 or more characters without leading or trailing spaces.");
