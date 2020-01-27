@@ -3,9 +3,12 @@ package api;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 
+import static org.testng.Assert.assertTrue;
+
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.http.util.Asserts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -112,8 +115,7 @@ public class Topic_05_Element_II {
 		if (slider02IsDisabled != true) {
 			System.out.println("Slider 02 is disabled");
 		}
-		
-		
+
 		if (txtPasswordIsDisabled == true) {
 			System.out.println("Password is enabled");
 		}
@@ -132,16 +134,30 @@ public class Topic_05_Element_II {
 		if (slider02IsDisabled == true) {
 			System.out.println("Slider 02 is enabled");
 		}
-		
-		
-
 
 	}
 
-	// @Test
-	// public void TC_03_CheckElementIsSelected() {
-	//
-	// }
+	@Test
+	public void TC_03_CheckElementIsSelected() throws Exception {
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+
+		WebElement ageRadUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
+		WebElement chkDevelopment = driver.findElement(By.xpath("//input[@id='development']"));
+
+		if (ageRadUnder18.isDisplayed()) {
+			ageRadUnder18.click();
+
+		}
+		if (chkDevelopment.isDisplayed()) {
+			chkDevelopment.click();
+		}
+		
+		
+		Assert.assertTrue(ageRadUnder18.isSelected());
+		Assert.assertTrue(chkDevelopment.isSelected());
+		
+
+	}
 
 	@AfterClass
 	public void afterClass() {
