@@ -1,35 +1,26 @@
 package api;
 
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;
-
-import static org.testng.Assert.assertTrue;
-
-import java.security.SecureRandom;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.http.util.Asserts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class Topic_05_Element_II {
 
 	private WebDriver driver;
-	private static final String CHAR_LIST = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private static String randomEmail = generateRandomEmail(10) + "@yopmail.com";
+	String randomEmail = "jsstaham" + randomNumber() + "hotmail.com" ;
 
-	@Test
-	public static String generateRandomEmail(int length) {
-		StringBuffer randStr = new StringBuffer();
-		SecureRandom secureRandom = new SecureRandom();
-
-		for (int i = 0; i < length; i++)
-			randStr.append(CHAR_LIST.charAt(secureRandom.nextInt(CHAR_LIST.length())));
-		return randStr.toString();
+	//Random Method
+	public static int randomNumber() {
+		Random rand = new Random();
+		return rand.nextInt();
 	}
 
 	@BeforeClass
