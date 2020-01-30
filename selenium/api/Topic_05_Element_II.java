@@ -15,6 +15,14 @@ import org.testng.annotations.Test;
 public class Topic_05_Element_II {
 
 	private WebDriver driver;
+	public static final String WEBSITE_TEST_URL = "https://automationfc.github.io/basic-form/index.html";
+	By radioAgeUnder18 = By.id("under_18");
+	By textboxEmail = By.id("mail");
+	By textareaEducation = By.id("edu");
+	
+	
+	
+	
 	String randomEmail = "jsstaham" + randomNumber() + "hotmail.com" ;
 
 	//Random Method
@@ -25,7 +33,10 @@ public class Topic_05_Element_II {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+		//Compile in Local Macbook Device URL
+//		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");	
+		//Compile in Local Windows Device URL
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\KhanhPPN-Web\\Desktop\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -33,11 +44,13 @@ public class Topic_05_Element_II {
 
 	@Test
 	public void TC_01_CheckElementIsDisplayed() {
-		driver.get("https://automationfc.github.io/basic-form/index.html");
+		driver.get(WEBSITE_TEST_URL);
 
-		WebElement txtEmail = driver.findElement(By.xpath("//input[@id='mail']"));
-		WebElement radAgeUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
-		WebElement txtEducation = driver.findElement(By.xpath("//textarea[@id='edu']"));
+	//	WebElement txtEmail = driver.findElement(By.xpath("//input[@id='mail']"));
+		WebElement txtEmail = driver.findElement(textboxEmail);
+	//	WebElement radAgeUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
+		WebElement radAgeUnder18 = driver.findElement(radioAgeUnder18);
+		WebElement txtEducation = driver.findElement(textareaEducation);
 
 		if (txtEmail.isDisplayed()) {
 			txtEmail.sendKeys(randomEmail);
@@ -53,12 +66,15 @@ public class Topic_05_Element_II {
 
 	@Test
 	public void TC_02_CheckElementIsEnabled() {
-		driver.get("https://automationfc.github.io/basic-form/index.html");
+		driver.get(WEBSITE_TEST_URL);
 
 		// Element is enabled declaration
-		WebElement txtEmail = driver.findElement(By.xpath("//input[@id='mail']"));
-		WebElement radAgeUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
-		WebElement txtEducation = driver.findElement(By.xpath("//textarea[@id='edu']"));
+	//	WebElement txtEmail = driver.findElement(By.xpath("//input[@id='mail']"));
+		WebElement txtEmail = driver.findElement(textboxEmail);
+	//	WebElement radAgeUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
+		WebElement radAgeUnder18 = driver.findElement(radioAgeUnder18);
+//		WebElement txtEducation = driver.findElement(By.xpath("//textarea[@id='edu']"));
+		WebElement txtEducation = driver.findElement(textareaEducation);
 		WebElement selJobRole1 = driver.findElement(By.xpath("//select[@id='job1']"));
 		WebElement radDevelopmentInt = driver
 				.findElement(By.xpath("//label[text()='Interests:']//following-sibling::input[@id='development']"));
@@ -130,7 +146,7 @@ public class Topic_05_Element_II {
 
 	@Test
 	public void TC_03_CheckElementIsSelected() throws Exception {
-		driver.get("https://automationfc.github.io/basic-form/index.html");
+		driver.get(WEBSITE_TEST_URL);
 
 		WebElement ageRadUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
 		WebElement chkDevelopment = driver.findElement(By.xpath("//input[@id='development']"));
