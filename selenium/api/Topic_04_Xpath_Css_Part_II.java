@@ -2,7 +2,7 @@ package api;
 
 import static org.testng.Assert.assertTrue;
 
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -21,6 +21,7 @@ public class Topic_04_Xpath_Css_Part_II {
 	By passwordTextbox = By.id("pass");
 	By loginButton = By.id("send2");
 
+	private static final String CHAR_LIST = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	String myAccountHomePage = "//div[@class='footer']//div[@class='links']//ul//li[@class='first']//a[text()='My Account']";
 	String firstNameRegister = "//div[@class='input-box']//input[@id='firstname']";
@@ -39,13 +40,15 @@ public class Topic_04_Xpath_Css_Part_II {
 	String accountLinkHeaderAfterLogin = "//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']//span[text()='Account']";
 	String accountLogOutAfterLogin = "//div[@id='header-account']//div[@class='links']//ul//li[@class=' last']//a[text()='Log Out']";
 	String imgHomepageAfterLogout = "//div[@class='page-title']//img";
-	String randomEmail = "nhatkhanh"+ randomNumber() + "@hotmail.com";
 
 	// method generate random email
-	// Random Method
-	public static int randomNumber() {
-		Random rand = new Random();
-		return rand.nextInt();
+	public static String generateRandomString(int length) {
+		StringBuffer randStr = new StringBuffer();
+		SecureRandom secureRandom = new SecureRandom();
+
+		for (int i = 0; i < length; i++)
+			randStr.append(CHAR_LIST.charAt(secureRandom.nextInt(CHAR_LIST.length())));
+		return randStr.toString();
 	}
 
 	@BeforeClass
@@ -122,6 +125,7 @@ public class Topic_04_Xpath_Css_Part_II {
 
 	@Test
 	public void TC_06_CreateNewUser() throws Exception {
+		String randomEmail = generateRandomString(10) + "@yopmail.com";
 		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//a[@class='skip-link skip-account']"))
 				.click();
 
