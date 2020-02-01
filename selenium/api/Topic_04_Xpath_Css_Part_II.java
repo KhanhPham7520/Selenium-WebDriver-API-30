@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import utils.MessageUtilsForTopic04;
+
 public class Topic_04_Xpath_Css_Part_II {
 
 	private WebDriver driver;
@@ -53,7 +55,8 @@ public class Topic_04_Xpath_Css_Part_II {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+	//	System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\KhanhPPN-Web\\Desktop\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
@@ -78,9 +81,9 @@ public class Topic_04_Xpath_Css_Part_II {
 
 		// 2.AssertEquals
 		Assert.assertEquals(driver.findElement(By.id("advice-required-entry-email")).getText(),
-				"This is a required field.");
+				MessageUtilsForTopic04.REQUIRED_MESSAGE);
 		Assert.assertEquals(driver.findElement(By.id("advice-required-entry-pass")).getText(),
-				"This is a required field.");
+				MessageUtilsForTopic04.REQUIRED_MESSAGE);
 
 	}
 
@@ -91,7 +94,7 @@ public class Topic_04_Xpath_Css_Part_II {
 		Assert.assertEquals(driver.findElement(By.id("advice-validate-email-email")).getText(),
 				"Please enter a valid email address. For example johndoe@domain.com.");
 		Assert.assertEquals(driver.findElement(By.id("advice-required-entry-pass")).getText(),
-				"This is a required field.");
+				MessageUtilsForTopic04.REQUIRED_MESSAGE);
 	}
 
 	@Test
