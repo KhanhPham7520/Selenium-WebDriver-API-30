@@ -80,7 +80,7 @@ public class Topic_10_Window_Tab {
 		swichToWindowsByTitle("Kyna.vn - Học online cùng chuyên gia");
 
 		sleepInSecond(3);
-		
+
 		driver.findElement(By.xpath("//img[@alt='apple-app-icon']//parent::a")).click();
 		swichToWindowsByTitle("KYNA on the App Store");
 		Assert.assertEquals(driver.getCurrentUrl(), "https://apps.apple.com/us/app/kyna/id1384374935?ls=1");
@@ -112,6 +112,41 @@ public class Topic_10_Window_Tab {
 		swichToWindowsByTitle("Kyna.vn - Học online cùng chuyên gia");
 		closeWindowsWithoutParent(parentWindow);
 		Assert.assertEquals(driver.getCurrentUrl(), "https://kyna.vn/");
+	}
+
+	@Test
+	public void TC_06_Windows_Tab() {
+		driver.get("http://live.demoguru99.com/index.php/");
+		String parentWindow = driver.getWindowHandle();
+
+		driver.findElement(By.xpath("//a[text()='Mobile']")).click();
+		
+		
+		
+        driver.findElement(By.xpath("//a[@title='Sony Xperia']//parent::h2//following-sibling::div[@class='actions']//ul[@class='add-to-links']//li//a[text()='Add to Compare']")).click();
+		String msgAddSonyExperiaSuccess = "The product Sony Xperia has been added to comparison list.";
+		Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']//ul//li//span")).getText(), msgAddSonyExperiaSuccess);
+		
+		
+		
+        driver.findElement(By.xpath("//a[@title='Samsung Galaxy']//parent::h2//following-sibling::div[@class='actions']//ul[@class='add-to-links']//li//a[text()='Add to Compare']")).click();
+		String msgAddSamsungGalaxySuccess = "The product Samsung Galaxy has been added to comparison list.";
+		Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']//ul//li//span")).getText(), msgAddSamsungGalaxySuccess);
+		
+		driver.findElement(By.xpath("//button[@title='Compare']")).click();
+
+		swichToWindowsByTitle("Products Comparison List - Magento Commerce");
+		
+		Assert.assertEquals(driver.getTitle(), "Products Comparison List - Magento Commerce");
+		driver.findElement(By.xpath("//button[@title='Close Window']")).click();
+		
+		swichToWindowsByTitle("Mobile");
+		
+		driver.findElement(By.xpath("//a[text()='Clear All']")).click();
+		
+		driver.switchTo().alert().accept();
+		
+		Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']//ul//li//span")).getText(), "The comparison list was cleared.");
 	}
 
 	public void sleepInSecond(long timeout) {
