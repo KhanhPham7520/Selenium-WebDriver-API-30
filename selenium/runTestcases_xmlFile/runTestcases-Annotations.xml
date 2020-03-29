@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+
+	<test name="Test_Annotation">
+		<classes>
+			<class name="TestNG_Exercise.TestNG_Annotations" />
+		</classes>
+	</test> <!-- Test -->
+
+	<test name="Test_Group">
+		<parameter name="browser" value="firefox" />
+		<groups>
+			<run>
+				<include name="customer" />
+			</run>
+		</groups>
+		
+		<packages>
+			<package name="testng" />
+		</packages>
+
+	</test>
+
+
+</suite> <!-- Suite -->

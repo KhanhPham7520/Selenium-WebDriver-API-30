@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+	<test name="Run test case on CHROME">
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="testng_framework.Part_IV_Group" />
+		</classes>
+	</test>
+
+	<test name="Run test case on FIREFOX">
+		<parameter name="browser" value="firefox"></parameter>
+		<classes>
+			<class name="testng_framework.Part_II_Group" />
+		</classes>
+	</test>
+	
+	<test name="Run test case on SAFARI">
+		<parameter name="browser" value="safari"></parameter>
+		<classes>
+			<class name="testng_framework.Part_II_Group" />
+		</classes>
+	</test>
+
+</suite> <!-- Suite -->
