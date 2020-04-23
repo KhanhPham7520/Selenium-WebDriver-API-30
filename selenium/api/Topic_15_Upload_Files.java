@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -31,9 +31,9 @@ public class Topic_15_Upload_Files {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+		System.setProperty("webdriver.gecko.driver", "/Users/apple/Desktop/geckodriver");
 		// System.setProperty("webdriver.chrome.driver", rootFolderPath + "//library//chromedriver");
-		driver = new ChromeDriver();
+		driver = new FirefoxDriver();
 
 		// driver = new FirefoxDriver();
 
@@ -41,7 +41,7 @@ public class Topic_15_Upload_Files {
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
 
-	// @Test
+	@Test
 	public void TC_01_Sendkeys() {
 		driver.get("http://blueimp.github.io/jQuery-File-Upload/");
 		System.out.println("URL : " + macProPath);
@@ -69,7 +69,7 @@ public class Topic_15_Upload_Files {
 	@Test
 	public void TC_04() {
 		driver.get("https://gofile.io/?t=uploadFiles");
-	//	String parentWindows = driver.getWindowHandle();
+		// String parentWindows = driver.getWindowHandle();
 		String subWindowHandler = null;
 		WebElement uploadFile = driver.findElement(By.name("filesUploaded"));
 		uploadFile.sendKeys(macProPath + "\n" + thinkpadX1Path + "\n" + dellXPSPath);
@@ -85,31 +85,28 @@ public class Topic_15_Upload_Files {
 
 		Set<String> handles = driver.getWindowHandles(); // get all window handles
 		Iterator<String> iterator = handles.iterator();
-		while (iterator.hasNext()){
-		    subWindowHandler = iterator.next();
+		while (iterator.hasNext()) {
+			subWindowHandler = iterator.next();
 		}
 		driver.switchTo().window(subWindowHandler); // switch to popup window
 
 		Assert.assertEquals(driver.findElement(By.xpath("//h2[@id='swal2-title']//strong[text()='Success !']")).getText(), "Success !");
-		
+
 		driver.findElement(By.xpath("//button[@class='swal2-confirm swal2-styled']")).click();
-		
+
 		driver.switchTo().defaultContent();
-		
+
 		driver.findElement(By.xpath("//a[@id='link']")).click();
-		
-	    List<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
-		
+
+		List<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+
 		driver.switchTo().window(tabs2.get(1));
-		
+
 		List<WebElement> downloadButtons = driver.findElements(By.xpath("//a[@class='download mr-1']//button"));
-		for(WebElement downloadButtonItem : downloadButtons) {
+
+		for (WebElement downloadButtonItem : downloadButtons) {
 			Assert.assertTrue(downloadButtonItem.isDisplayed());
 		}
-		
-		
-		
-		
 
 	}
 
@@ -126,7 +123,7 @@ public class Topic_15_Upload_Files {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void swichToWindowsByTitle(String windowTitle) {
 		Set<String> allWindows = driver.getWindowHandles();
 		System.out.println("All windows : " + allWindows);

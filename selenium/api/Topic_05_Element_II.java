@@ -19,13 +19,10 @@ public class Topic_05_Element_II {
 	By radioAgeUnder18 = By.id("under_18");
 	By textboxEmail = By.id("mail");
 	By textareaEducation = By.id("edu");
-	
-	
-	
-	
-	String randomEmail = "jsstaham" + randomNumber() + "hotmail.com" ;
 
-	//Random Method
+	String randomEmail = "jsstaham" + randomNumber() + "hotmail.com";
+
+	// Random Method
 	public static int randomNumber() {
 		Random rand = new Random();
 		return rand.nextInt();
@@ -33,10 +30,10 @@ public class Topic_05_Element_II {
 
 	@BeforeClass
 	public void beforeClass() {
-		//Compile in Local Macbook Device URL
-//		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");	
-		//Compile in Local Windows Device URL
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\KhanhPPN-Web\\Desktop\\chromedriver.exe");
+		// Compile in Local Macbook Device URL
+		 System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+		// Compile in Local Windows Device URL
+		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\KhanhPPN-Web\\Desktop\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -46,9 +43,9 @@ public class Topic_05_Element_II {
 	public void TC_01_CheckElementIsDisplayed() {
 		driver.get(WEBSITE_TEST_URL);
 
-	//	WebElement txtEmail = driver.findElement(By.xpath("//input[@id='mail']"));
+		// WebElement txtEmail = driver.findElement(By.xpath("//input[@id='mail']"));
 		WebElement txtEmail = driver.findElement(textboxEmail);
-	//	WebElement radAgeUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
+		// WebElement radAgeUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
 		WebElement radAgeUnder18 = driver.findElement(radioAgeUnder18);
 		WebElement txtEducation = driver.findElement(textareaEducation);
 
@@ -69,15 +66,14 @@ public class Topic_05_Element_II {
 		driver.get(WEBSITE_TEST_URL);
 
 		// Element is enabled declaration
-	//	WebElement txtEmail = driver.findElement(By.xpath("//input[@id='mail']"));
+		// WebElement txtEmail = driver.findElement(By.xpath("//input[@id='mail']"));
 		WebElement txtEmail = driver.findElement(textboxEmail);
-	//	WebElement radAgeUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
+		// WebElement radAgeUnder18 = driver.findElement(By.xpath("//input[@id='under_18']"));
 		WebElement radAgeUnder18 = driver.findElement(radioAgeUnder18);
-//		WebElement txtEducation = driver.findElement(By.xpath("//textarea[@id='edu']"));
+		// WebElement txtEducation = driver.findElement(By.xpath("//textarea[@id='edu']"));
 		WebElement txtEducation = driver.findElement(textareaEducation);
 		WebElement selJobRole1 = driver.findElement(By.xpath("//select[@id='job1']"));
-		WebElement radDevelopmentInt = driver
-				.findElement(By.xpath("//label[text()='Interests:']//following-sibling::input[@id='development']"));
+		WebElement radDevelopmentInt = driver.findElement(By.xpath("//label[text()='Interests:']//following-sibling::input[@id='development']"));
 		WebElement slider01 = driver.findElement(By.xpath("//input[@id='slider-1']"));
 
 		// Elements is disabled declaration
@@ -158,11 +154,9 @@ public class Topic_05_Element_II {
 		if (chkDevelopment.isDisplayed()) {
 			chkDevelopment.click();
 		}
-		
-		
+
 		Assert.assertTrue(ageRadUnder18.isSelected());
 		Assert.assertTrue(chkDevelopment.isSelected());
-		
 
 	}
 

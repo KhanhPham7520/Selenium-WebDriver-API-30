@@ -1,19 +1,16 @@
 package api;
 
-import org.testng.annotations.Test;
-
-import org.testng.annotations.BeforeClass;
-
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import org.testng.Assert;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class Topic_10_Window_Tab {
 	private WebDriver driver;
@@ -81,6 +78,8 @@ public class Topic_10_Window_Tab {
 
 		sleepInSecond(3);
 
+		driver.switchTo().alert().dismiss();
+		
 		driver.findElement(By.xpath("//img[@alt='apple-app-icon']//parent::a")).click();
 		swichToWindowsByTitle("KYNA on the App Store");
 		Assert.assertEquals(driver.getCurrentUrl(), "https://apps.apple.com/us/app/kyna/id1384374935?ls=1");
