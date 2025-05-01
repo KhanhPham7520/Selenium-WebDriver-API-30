@@ -14,7 +14,9 @@ public class Topic_02_Locator_in_Selenium {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+		String projectDir = System.getProperty("user.dir");
+		System.setProperty("webdriver.chrome.driver", projectDir + "/library/chromedriver");
+
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

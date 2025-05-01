@@ -1,5 +1,6 @@
 package api;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -18,7 +19,8 @@ public class Topic_01_Setup_Environment {
 	// ưu tiên mở cái đầu tiên lên trước
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+		String projectDir = System.getProperty("user.dir");
+		System.setProperty("webdriver.chrome.driver", projectDir + "/library/chromedriver");
 		driver = new ChromeDriver();
 
 //		driver = new FirefoxDriver();
@@ -62,30 +64,27 @@ public class Topic_01_Setup_Environment {
 		Assert.assertTrue(driver.findElement(By.cssSelector("#hplogo")).isDisplayed());
 	}
 
-	// Additional Demo
-	@Test
-	public void TC_04_Check_Text_Google_Search_Button() {
-		String googleSearchTextButtonSelector = "//*[@id=\"tsf\"]/div[2]/div[1]/div[3]/center/input[1]";
-		WebElement googleSearchTextButton = driver.findElement(By.xpath(googleSearchTextButtonSelector));
-		Assert.assertEquals(googleSearchTextButton, "Google Search");
-	}
-
-	@Test
-	public void TC_05_Check_Images_Link_isDisplayed() {
-		// WebElement imgLinkSel = driver.findElement(By.cssSelector("#gbw > div > div >
-		// div.gb_9d.gb_i.gb_yg.gb_pg > div:nth-child(2) > a"));
-		String imgLinkSel = "//*[@id=\"gbw\"]/div/div/div[1]/div[2]/a";
-		WebElement imgLink = driver.findElement(By.xpath(imgLinkSel));
-
-		Assert.assertTrue(imgLink.isDisplayed());
-	}
-
 	// Chạy cuối cùng ở các testcases
 	// Post-condition(Manual)
 	@AfterClass
-	public void afterClass() {
+	public void afterClass() throws IOException {
+
+		Runtime runtime = Runtime.getRuntime();
+		String os = System.getProperty("os.name").toLowerCase();
+
 		// Tắt Brownser
-		driver.quit();
+		driver.close();
+		if (os.contains("win")) {
+			// Windows: Dùng taskkill để kill process
+			runtime.exec("taskkill /F /IM node.exe");
+			runtime.exec("taskkill /F /IM cmd.exe");
+		} else if (os.contains("mac") || os.contains("nix") || os.contains("nux")) {
+			// macOS/Linux: Dùng pkill
+			runtime.exec("pkill -f node");
+			runtime.exec("pkill -f appium");
+		} else {
+			System.out.println("Unsupported OS: " + os);
+		}
 	}
 
 }

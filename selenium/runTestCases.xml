@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite" parallel="false">
 	<test name="Run test case on CHROME">
-		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="browser" value="chrome"/>
 		<classes>
-			<class name="testng_framework.Part_IV_Group" />
+			<class name="testng_framework.Part_IV_Data_Provider" />
 		</classes>
 	</test>
 
 	<test name="Run test case on FIREFOX">
-		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="browser" value="firefox"/>
 		<classes>
 			<class name="testng_framework.Part_II_Group" />
 		</classes>
 	</test>
 	
 	<test name="Run test case on SAFARI">
-		<parameter name="browser" value="safari"></parameter>
+		<parameter name="browser" value="safari"/>
 		<classes>
 			<class name="testng_framework.Part_II_Group" />
 		</classes>
