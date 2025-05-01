@@ -1,11 +1,5 @@
 package api;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,125 +9,128 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 public class Topic_15_Upload_Files {
-	private WebDriver driver;
-	private String rootFolderPath = System.getProperty("user.dir");
+    String projectNamePath = "SELENIUM_API_14_KHANH_PPN";
+    String macProName = "MacPro.png";
+    String thinkPadx1Name = "X1.jpg";
+    String dellXPSName = "XPS.jpg";
+    private WebDriver driver;
+    private String rootFolderPath = System.getProperty("user.dir");
+    String macProPath = rootFolderPath + "//uploadFiles//" + macProName;
+    String thinkpadX1Path = rootFolderPath + "//uploadFiles//" + thinkPadx1Name;
+    String dellXPSPath = rootFolderPath + "//uploadFiles//" + dellXPSName;
 
-	String projectNamePath = "SELENIUM_API_14_KHANH_PPN";
+    @BeforeClass
+    public void beforeClass() {
+        System.setProperty("webdriver.gecko.driver", "/Users/apple/Desktop/geckodriver");
+        // System.setProperty("webdriver.chrome.driver", rootFolderPath + "//library//chromedriver");
+        driver = new FirefoxDriver();
 
-	String macProName = "MacPro.png";
-	String thinkPadx1Name = "X1.jpg";
-	String dellXPSName = "XPS.jpg";
+        // driver = new FirefoxDriver();
 
-	String macProPath = rootFolderPath + "//uploadFiles//" + macProName;
-	String thinkpadX1Path = rootFolderPath + "//uploadFiles//" + thinkPadx1Name;
-	String dellXPSPath = rootFolderPath + "//uploadFiles//" + dellXPSName;
+        // Wait cho element được hiển thị thao tác
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+    }
 
-	@BeforeClass
-	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", "/Users/apple/Desktop/geckodriver");
-		// System.setProperty("webdriver.chrome.driver", rootFolderPath + "//library//chromedriver");
-		driver = new FirefoxDriver();
+    @Test
+    public void TC_01_Sendkeys() {
+        driver.get("http://blueimp.github.io/jQuery-File-Upload/");
+        System.out.println("URL : " + macProPath);
+        // Tìm 1 element và lưu nó vào biến uploadFile (A)
+        WebElement uploadFile = driver.findElement(By.xpath("//input[@name='files[]']"));
+        uploadFile.sendKeys(macProPath + "\n" + thinkpadX1Path + "\n" + dellXPSPath);
+        sleepInSecond(3);
 
-		// driver = new FirefoxDriver();
+        Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='MacPro.png']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='X1.jpg']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='XPS.jpg']")).isDisplayed());
 
-		// Wait cho element được hiển thị thao tác
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-	}
+        // click in Start Button at each file
+        List<WebElement> startButtons = driver.findElements(By.cssSelector("table .start"));
+        for (WebElement start : startButtons) {
+            start.click();
+            sleepInSecond(2);
+        }
 
-	@Test
-	public void TC_01_Sendkeys() {
-		driver.get("http://blueimp.github.io/jQuery-File-Upload/");
-		System.out.println("URL : " + macProPath);
-		// Tìm 1 element và lưu nó vào biến uploadFile (A)
-		WebElement uploadFile = driver.findElement(By.xpath("//input[@name='files[]']"));
-		uploadFile.sendKeys(macProPath + "\n" + thinkpadX1Path + "\n" + dellXPSPath);
-		sleepInSecond(3);
+        Assert.assertTrue(driver.findElement(By.xpath("//a[text()='" + macProName + "' and @href]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//a[text()='" + thinkPadx1Name + "' and @href]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//a[text()='" + dellXPSName + "' and @href]")).isDisplayed());
+    }
 
-		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='MacPro.png']")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='X1.jpg']")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='name' and text()='XPS.jpg']")).isDisplayed());
+    @Test
+    public void TC_04() {
+        driver.get("https://gofile.io/?t=uploadFiles");
+        // String parentWindows = driver.getWindowHandle();
+        String subWindowHandler = null;
+        WebElement uploadFile = driver.findElement(By.name("filesUploaded"));
+        uploadFile.sendKeys(macProPath + "\n" + thinkpadX1Path + "\n" + dellXPSPath);
+        sleepInSecond(3);
 
-		// click in Start Button at each file
-		List<WebElement> startButtons = driver.findElements(By.cssSelector("table .start"));
-		for (WebElement start : startButtons) {
-			start.click();
-			sleepInSecond(2);
-		}
+        Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + macProName + "']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + thinkPadx1Name + "']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + dellXPSName + "']")).isDisplayed());
 
-		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='" + macProName + "' and @href]")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='" + thinkPadx1Name + "' and @href]")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='" + dellXPSName + "' and @href]")).isDisplayed());
-	}
+        driver.findElement(By.id("btnUpload")).click();
 
-	@Test
-	public void TC_04() {
-		driver.get("https://gofile.io/?t=uploadFiles");
-		// String parentWindows = driver.getWindowHandle();
-		String subWindowHandler = null;
-		WebElement uploadFile = driver.findElement(By.name("filesUploaded"));
-		uploadFile.sendKeys(macProPath + "\n" + thinkpadX1Path + "\n" + dellXPSPath);
-		sleepInSecond(3);
+        sleepInSecond(6);
 
-		Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + macProName + "']")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + thinkPadx1Name + "']")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + dellXPSName + "']")).isDisplayed());
+        Set<String> handles = driver.getWindowHandles(); // get all window handles
+        Iterator<String> iterator = handles.iterator();
+        while (iterator.hasNext()) {
+            subWindowHandler = iterator.next();
+        }
+        driver.switchTo().window(subWindowHandler); // switch to popup window
 
-		driver.findElement(By.id("btnUpload")).click();
+        Assert.assertEquals(driver.findElement(By.xpath("//h2[@id='swal2-title']//strong[text()='Success !']")).getText(), "Success !");
 
-		sleepInSecond(6);
+        driver.findElement(By.xpath("//button[@class='swal2-confirm swal2-styled']")).click();
 
-		Set<String> handles = driver.getWindowHandles(); // get all window handles
-		Iterator<String> iterator = handles.iterator();
-		while (iterator.hasNext()) {
-			subWindowHandler = iterator.next();
-		}
-		driver.switchTo().window(subWindowHandler); // switch to popup window
+        driver.switchTo().defaultContent();
 
-		Assert.assertEquals(driver.findElement(By.xpath("//h2[@id='swal2-title']//strong[text()='Success !']")).getText(), "Success !");
+        driver.findElement(By.xpath("//a[@id='link']")).click();
 
-		driver.findElement(By.xpath("//button[@class='swal2-confirm swal2-styled']")).click();
+        List<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
 
-		driver.switchTo().defaultContent();
+        driver.switchTo().window(tabs2.get(1));
 
-		driver.findElement(By.xpath("//a[@id='link']")).click();
+        List<WebElement> downloadButtons = driver.findElements(By.xpath("//a[@class='download mr-1']//button"));
 
-		List<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+        for (WebElement downloadButtonItem : downloadButtons) {
+            Assert.assertTrue(downloadButtonItem.isDisplayed());
+        }
 
-		driver.switchTo().window(tabs2.get(1));
+    }
 
-		List<WebElement> downloadButtons = driver.findElements(By.xpath("//a[@class='download mr-1']//button"));
+    @AfterClass
+    public void afterClass() {
+        driver.quit();
+    }
 
-		for (WebElement downloadButtonItem : downloadButtons) {
-			Assert.assertTrue(downloadButtonItem.isDisplayed());
-		}
+    public void sleepInSecond(long timeout) {
+        try {
+            Thread.sleep(timeout * 1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-	}
-
-	@AfterClass
-	public void afterClass() {
-		driver.quit();
-	}
-
-	public void sleepInSecond(long timeout) {
-		try {
-			Thread.sleep(timeout * 1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void swichToWindowsByTitle(String windowTitle) {
-		Set<String> allWindows = driver.getWindowHandles();
-		System.out.println("All windows : " + allWindows);
-		for (String id : allWindows) {
-			driver.switchTo().window(id);
-			String title = driver.getTitle();
-			if (title.equals(windowTitle)) {
-				break;
-			}
-		}
-	}
+    public void swichToWindowsByTitle(String windowTitle) {
+        Set<String> allWindows = driver.getWindowHandles();
+        System.out.println("All windows : " + allWindows);
+        for (String id : allWindows) {
+            driver.switchTo().window(id);
+            String title = driver.getTitle();
+            if (title.equals(windowTitle)) {
+                break;
+            }
+        }
+    }
 
 }

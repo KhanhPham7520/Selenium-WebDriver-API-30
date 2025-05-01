@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite" parallel="false">
-	<test name="Run test case on CHROME">
-		<parameter name="browser" value="chrome"></parameter>
-		
-		<packages>
-			<package name="tesng_framework" />
-		</packages>
-	</test>
+    <test name="Run test case on CHROME">
+        <parameter name="browser" value="chrome"></parameter>
+
+        <packages>
+            <package name="tesng_framework"/>
+        </packages>
+    </test>
 
 
 </suite> <!-- Suite -->

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite" parallel="false">
-	<test name="Test_Group">
-		<classes>
-			<class name="TestNG_Exercise.TestNG_Priority_Description" />
-		</classes>
+    <test name="Test_Group">
+        <classes>
+            <class name="TestNG_Exercise.TestNG_Priority_Description"/>
+        </classes>
 
-	</test>
+    </test>
 
 
 </suite> <!-- Suite -->
