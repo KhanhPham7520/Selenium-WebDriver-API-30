@@ -3,6 +3,7 @@ package api;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,7 +17,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class Topic_15_Upload_Files {
-    String projectNamePath = "SELENIUM_API_14_KHANH_PPN";
     String macProName = "MacPro.png";
     String thinkPadx1Name = "X1.jpg";
     String dellXPSName = "XPS.jpg";
@@ -28,20 +28,25 @@ public class Topic_15_Upload_Files {
 
     @BeforeClass
     public void beforeClass() {
-        System.setProperty("webdriver.gecko.driver", "/Users/apple/Desktop/geckodriver");
-        // System.setProperty("webdriver.chrome.driver", rootFolderPath + "//library//chromedriver");
-        driver = new FirefoxDriver();
+        String projectDir = System.getProperty("user.dir");
+        System.setProperty("webdriver.chrome.driver", projectDir + "/library/chromedriver");
 
-        // driver = new FirefoxDriver();
+        driver = new ChromeDriver();
+
+        // Phóng to trình duyệt
+        driver.manage().window().maximize();
 
         // Wait cho element được hiển thị thao tác
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+        // Phóng to trình duyệt
+        driver.manage().window().maximize();
     }
 
     @Test
     public void TC_01_Sendkeys() {
         driver.get("http://blueimp.github.io/jQuery-File-Upload/");
-        System.out.println("URL : " + macProPath);
+
         // Tìm 1 element và lưu nó vào biến uploadFile (A)
         WebElement uploadFile = driver.findElement(By.xpath("//input[@name='files[]']"));
         uploadFile.sendKeys(macProPath + "\n" + thinkpadX1Path + "\n" + dellXPSPath);
@@ -66,7 +71,6 @@ public class Topic_15_Upload_Files {
     @Test
     public void TC_04() {
         driver.get("https://gofile.io/?t=uploadFiles");
-        // String parentWindows = driver.getWindowHandle();
         String subWindowHandler = null;
         WebElement uploadFile = driver.findElement(By.name("filesUploaded"));
         uploadFile.sendKeys(macProPath + "\n" + thinkpadX1Path + "\n" + dellXPSPath);
@@ -76,7 +80,7 @@ public class Topic_15_Upload_Files {
         Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + thinkPadx1Name + "']")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + dellXPSName + "']")).isDisplayed());
 
-        driver.findElement(By.id("btnUpload")).click();
+        driver.findElement(By.xpath("//p[text()='Drag & Drop or Click to Upload']")).click();
 
         sleepInSecond(6);
 
@@ -116,7 +120,6 @@ public class Topic_15_Upload_Files {
         try {
             Thread.sleep(timeout * 1000);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

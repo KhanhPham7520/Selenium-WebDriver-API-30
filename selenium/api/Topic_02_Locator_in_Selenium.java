@@ -24,18 +24,12 @@ public class Topic_02_Locator_in_Selenium {
 
     @Test
     public void TC_01_Locator() {
-        driver.get("http://live.demoguru99.com/index.php/customer/account/login/");
-    }
-
-
-    public void TC_02_Locator() {
-        //driver.get("http://live.demoguru99.com/index.php/customer/account/login/");
+        driver.get("https://live.techpanda.org/");
     }
 
     @AfterClass
     public void afterClass() {
         driver.quit();
-
     }
 
 }

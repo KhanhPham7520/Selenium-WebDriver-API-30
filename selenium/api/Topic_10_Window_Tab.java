@@ -17,7 +17,7 @@ public class Topic_10_Window_Tab {
 
     @BeforeClass
     public void beforeClass() {
-        System.setProperty("webdriver.chrome.driver", "/Users/apple/Desktop/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "library/chromedriver");
         driver = new ChromeDriver();
 
         // driver = new FirefoxDriver();
@@ -183,6 +183,7 @@ public class Topic_10_Window_Tab {
     @AfterClass
     public void afterClass() {
         driver.quit();
+        DriverUtils.killDriverProcess();
     }
 
 }

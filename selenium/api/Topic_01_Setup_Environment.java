@@ -14,15 +14,11 @@ import java.util.concurrent.TimeUnit;
 public class Topic_01_Setup_Environment {
     private WebDriver driver;
 
-    // Chạy đầu tiên 1 lần trước các testcases
-    // ưu tiên mở cái đầu tiên lên trước
     @BeforeClass
     public void beforeClass() {
         String projectDir = System.getProperty("user.dir");
         System.setProperty("webdriver.chrome.driver", projectDir + "/library/chromedriver");
         driver = new ChromeDriver();
-
-//		driver = new FirefoxDriver();
 
         // Phóng to trình duyệt
         driver.manage().window().maximize();
@@ -38,7 +34,6 @@ public class Topic_01_Setup_Environment {
 
     }
 
-    // Xem đây như là 1 testcase
     @Test
     public void TC_01_Check_Google_Title() {
         String googleTitle = driver.getTitle();
@@ -58,20 +53,17 @@ public class Topic_01_Setup_Environment {
 
     @Test
     public void TC_03_Check_Google_Logo() {
-        // Check Google logo is displayed
-        // WebElement googleLogoXpath = driver.findElement(By.cssSelector("#hplogo"));
         Assert.assertTrue(driver.findElement(By.cssSelector("#hplogo")).isDisplayed());
     }
 
-    // Chạy cuối cùng ở các testcases
-    // Post-condition(Manual)
+
     @AfterClass
     public void afterClass() throws IOException {
 
         Runtime runtime = Runtime.getRuntime();
         String os = System.getProperty("os.name").toLowerCase();
 
-        // Tắt Brownser
+        // Tắt Browser
         driver.close();
         if (os.contains("win")) {
             // Windows: Dùng taskkill để kill process
